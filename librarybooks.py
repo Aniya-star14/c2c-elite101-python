@@ -15,6 +15,11 @@ def listAvailableBooks():
 # Search should be case-insensitive
 # Return a list of matching books
 def searchBooks():
+    characteristic = input("Search by (author/genre): ").lower()
+    value = input("Enter search value: ")
+    results = search_books(characteristic, value)
+    for book in results:
+        print(f'{book["author"]}: {book["genre"]}')
 
 
 # -------- Level 3 --------
@@ -25,7 +30,7 @@ def searchBooks():
 #   - Increment the checkouts counter
 # If it is not available:
 #   - Print a message saying it's already checked out
-//
+
 def checkoutBook():
     id = input("Enter the books ID: ")
     print(checkout_book(id))
@@ -72,9 +77,11 @@ def getChoice():
 def viewBooks():
     for book in library_books:
         status = "Available"
-        if book["available"]
-        else print("Checked out")
-        print(f'{book["id"]}: {book["title"]} by {book["author"]} [{status}]')
+        if book["available"]:
+            print("")
+        else:
+            print("Checked out")
+            print(f'{book["id"]}: {book["title"]} by {book["author"]} [{status}]')
 
 
 
