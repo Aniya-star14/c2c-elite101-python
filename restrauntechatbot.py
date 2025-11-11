@@ -42,7 +42,7 @@ def restaurant_chatbot():
         elif choice == "4":
             view_total(name)
         elif choice == "5":
-            pickup_or_delivery()
+            pickup_or_delivery(name)
         elif choice == "6":
             make_reservation(name)
         elif choice == "7":
@@ -52,17 +52,19 @@ def restaurant_chatbot():
             print("Sorry, I do not understand that. Please choose an option 1-7 from the list")
 #displays the menu
 def show_menu():
-    print("\n Our Menu:")
-    print("1. Beef Tacos - $3.00")
-    print("2. Chicken Tacos - $3.00")
-    print("3. Quesadilla - $3.00")
-    print("4. Torta - $12.00")
-    print("5. Soft Drinks - $3.00")
-#display any specials for the user
+    print("\nOur Menu:")
+    for key, price in menu.items():
+        if key in ["6.asada fries", "7.loaded nachos"]:
+            continue  # Specials
+        clean_name = key.split('.', 1)[1].title()
+        print(f"{clean_name} - ${price:.2f}")
+
+
 def show_specials():
-    print("\n Today's Specials:")
-    print("6. Asada Fries - $12.00")
-    print("7. Loaded Nachos - $12.00")
+    print("\nToday's Specials:")
+    for key in ["6.asada fries", "7.loaded nachos"]:
+        clean_name = key.split('.', 1)[1].title()
+        print(f"{clean_name} - ${menu[key]:.2f}")
 
 def pickup_or_delivery(name):
         print("\nWould you like pickup or delivery?")
