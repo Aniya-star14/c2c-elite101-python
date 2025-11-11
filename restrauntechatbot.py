@@ -1,3 +1,4 @@
+import difflib
 order_list = []
 total = 0.0
 
@@ -85,6 +86,20 @@ def view_total():
     else:
         print("\nYou have not ordered anything yet.")
 
+def find_menu_item(user_input):
+    # user_input: what the user typed
+    # menu: global menu dictionary
+    user_input = user_input.lower()
+    menu_items = list(menu.keys())
+
+    # Find the closest match
+    closest_matches = difflib.get_close_matches(user_input, menu_items, n=1, cutoff=0.6)
+
+    if closest_matches:
+        return closest_matches[0]  # return the matched menu key
+    else:
+        return None
+
 # takes users imput to allow them to place an order
 def take_order(name):
     global total, order_list
@@ -97,10 +112,11 @@ def take_order(name):
 
         if order == "done":
             break
-        elif order in menu:
-            order_list.append(order)
-            total += menu[order]
-            print(f"Added {order.title()} - ${menu[order]:.2f} to your order.")
+        matched_item = find_menu_item(order)
+        if matched_item:
+            order_list.append(matched_item)
+            total += menu[matched_item]
+            print(f"Added {matched_item.title()} - ${menu[matched_item]:.2f} to your order.")
         else:
             print("Sorry, that item is not on the menu. Try again.")
 
