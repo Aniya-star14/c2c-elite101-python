@@ -3,13 +3,13 @@ order_list = []
 total = 0.0
 
 menu = {
-    "1.beef tacos": 3.00,
-    "2.chicken tacos": 3.00,
-    "3.quesadilla": 3.00,
-    "4.torta": 12.00,
-    "5.soft drinks": 3.00,
-    "6.asada fries": 12.00,
-    "7.loaded nachos": 12.00
+    "Beef tacos": 3.00,
+    "Chicken tacos": 3.00,
+    "Quesadilla": 3.00,
+    "Torta": 12.00,
+    "Soft drinks": 3.00,
+    "Asada fries": 12.00,
+    "Loaded nachos": 12.00
     }
 
 
@@ -40,7 +40,7 @@ def restaurant_chatbot():
         elif choice == "3":
             take_order(name)
         elif choice == "4":
-            view_total(name)
+            view_total()
         elif choice == "5":
             pickup_or_delivery(name)
         elif choice == "6":
@@ -54,7 +54,7 @@ def restaurant_chatbot():
 def show_menu():
     print("\nOur Menu:")
     for key, price in menu.items():
-        if key in ["6.asada fries", "7.loaded nachos"]:
+        if key in ["Asada fries", "Loaded nachos"]:
             continue  # Specials
         clean_name = key.split('.', 1)[1].title()
         print(f"{clean_name} - ${price:.2f}")
@@ -62,7 +62,7 @@ def show_menu():
 
 def show_specials():
     print("\nToday's Specials:")
-    for key in ["6.asada fries", "7.loaded nachos"]:
+    for key in ["Asada fries", "Loaded nachos"]:
         clean_name = key.split('.', 1)[1].title()
         print(f"{clean_name} - ${menu[key]:.2f}")
 
