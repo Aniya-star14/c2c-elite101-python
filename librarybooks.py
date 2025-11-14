@@ -31,11 +31,13 @@ def searchBooks():
     if characteristic not in ["author", "genre"]:
         print("Invalid search. Please enter an 'author' or 'genre'.")
         return
+
     value = input(f"Enter {characteristic} to search: "). strip().lower()
     results = search_Books(characteristic, value)
+
     if not results:
         print("No matching books found.")
-
+        return
     
     print(f"\nBooks matching {characteristic} '{value}':")
     for book in results:
@@ -50,6 +52,7 @@ def searchBooks():
 #   - Increment the checkouts counter
 # If it is not available:
 #   - Print a message saying it's already checked out
+
 
 def checkout_book(book_id):
     for book in library_books:
@@ -66,6 +69,7 @@ def checkout_book(book_id):
 def checkoutBook():
     id = input("Enter the book's ID: ")
     print(checkout_book(id))
+
 
 # -------- Level 4 --------
 # TODO: Create a function to return a book by ID
@@ -85,18 +89,22 @@ def returnBook():
     id = input("Enter the book's ID: ")
     print(return_book(id))
 
+
 # TODO: Create a function to list all overdue books
 # A book is overdue if its due_date is before today AND it is still checked out
 def viewOverdueBooks():
     print("\nOverdue Books: ")
     today = datetime.now()
     overdue_found = False
+
     for book in library_books:
         if not book["available"] and book["due_date"] and book["due_date"] < today:
             overdue_found = True
             print(f'ID: {book["id"]} | Title: "{book["title"]}" | Author: {book["author"]} | Due Date: {book["due_date"]}')
+
     if not overdue_found:
         print("No overdue books found.")
+
 
 
 # -------- Level 5 --------
@@ -110,8 +118,6 @@ class Book:
         self.available = available
         self.due_date = due_date
         self.checkouts = checkouts
-
-
 
     def checkout(self):
         if self.available:
@@ -127,8 +133,8 @@ class Book:
             self.available = True
             self.due_date = None
             return f"Returned '{self.title}'."
-        else:
             return "Book was not checked out."
+
 
 # TODO: Add a simple menu that allows the user to choose different options like view, search, checkout, return, etc.
 def displayMenu():
@@ -148,14 +154,13 @@ def displayMenu():
 # - Save/load catalog to file (CSV or JSON)
 # - Anything else you want to build on top of the system!
 
-
-
 def getChoice():
     try:
         return int(input("Enter your choice (1-7): "))
     except ValueError:
         print("Invalid input. Please enter a number listed. ")
         return getChoice()
+
 def viewBooks():
     print("\nAll Books: ")
     for book in library_books:
@@ -172,6 +177,7 @@ def main():
     while True:
         displayMenu()
         choice = getChoice()
+
         if choice == 1:
             listAvailableBooks()
         elif choice == 2:
